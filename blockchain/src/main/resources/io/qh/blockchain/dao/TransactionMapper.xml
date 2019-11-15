@@ -207,4 +207,11 @@
       block_id = #{blockId,jdbcType=INTEGER}
     where transaction_id = #{transactionId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByBlockId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from transaction
+    where block_id = #{blockId}
+  </select>
 </mapper>

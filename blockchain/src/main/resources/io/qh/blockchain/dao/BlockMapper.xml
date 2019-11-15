@@ -232,4 +232,22 @@
       nonce = #{nonce,jdbcType=VARCHAR}
     where block_id = #{blockId,jdbcType=INTEGER}
   </update>
+  <select id="selectRecent" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from block
+    order by time desc limit 10
+  </select>
+  <select id="selectWithPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from block
+    order by time desc
+  </select>
+  <select id="selectByBlockhash" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from block
+    where blockhash = #{blockhash}
+  </select>
 </mapper>

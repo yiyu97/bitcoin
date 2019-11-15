@@ -90,4 +90,10 @@
       amount = #{amount,jdbcType=DOUBLE}
     where tx_detail_id = #{txDetailId,jdbcType=BIGINT}
   </update>
+  <select id="selectByTransactionId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from transaction_detail
+    where transaction_id = #{transactionId}
+  </select>
 </mapper>

@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableFeignClients
-@MapperScan("io.qh.blockchains.dao")
+@MapperScan("io.qh.blockchain.dao")
 //@EnableScheduling
 @EnableAsync
 public class BlockchainApplication {

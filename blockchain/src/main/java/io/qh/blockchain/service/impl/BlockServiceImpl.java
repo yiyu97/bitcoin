@@ -1,21 +1,34 @@
 package io.qh.blockchain.service.impl;
 
+
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import io.qh.blockchain.client.BitcoinRest;
 import io.qh.blockchain.dao.BlockMapper;
 import io.qh.blockchain.po.Block;
 import io.qh.blockchain.service.BlockService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BlockServiceImpl implements BlockService {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private BitcoinRest bitcoinRest;
 
     @Autowired
     private BlockMapper blockMapper;
 
     @Autowired
-    private BitcoinRest bitcoinRest;
+    private TransactionServiceImpl transactionService;
 
     @Override
     public String syncBlock(String blockhash) {
@@ -43,10 +56,32 @@ public class BlockServiceImpl implements BlockService {
     }
 
     @Override
+    @Async
     public void syncBlocks(String fromBlockhash) {
+        logger.info("begin to sync blocks");
         String tempBlockhash = fromBlockhash;
         while (tempBlockhash != null){
             tempBlockhash = syncBlock(tempBlockhash);
         }
+        logger.info("end sync blocks");
+    }
+
+    @Override
+    public List<Block> getRecent() {
+        List<Block> blocks = blockMapper.selectRecent();
+        return blocks;
+    }
+
+    @Override
+    public Page<Block> getWithPage(Integer page) {
+        PageHelper.startPage(page, 20);
+        Page<Block> blocks = blockMapper.selectWithPage();
+        return blocks;
+    }
+
+    @Override
+    public Block getByBlockhash(String blockhash) {
+        Block block = blockMapper.selectByBlockhash(blockhash);
+        return block;
     }
 }

@@ -3,13 +3,13 @@ package io.qh.blockchain.po;
 public class TransactionDetail {
     private Long txDetailId;
 
-    private String txid;
-
     private String address;
 
     private Byte type;
 
     private Double amount;
+
+    private Integer transactionId;
 
     public Long getTxDetailId() {
         return txDetailId;
@@ -17,14 +17,6 @@ public class TransactionDetail {
 
     public void setTxDetailId(Long txDetailId) {
         this.txDetailId = txDetailId;
-    }
-
-    public String getTxid() {
-        return txid;
-    }
-
-    public void setTxid(String txid) {
-        this.txid = txid == null ? null : txid.trim();
     }
 
     public String getAddress() {
@@ -49,5 +41,13 @@ public class TransactionDetail {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public Integer getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(Integer transactionId) {
+        this.transactionId = transactionId;
     }
 }

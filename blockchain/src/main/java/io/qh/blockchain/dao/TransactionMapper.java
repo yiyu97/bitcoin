@@ -1,6 +1,9 @@
 package io.qh.blockchain.dao;
 
+import feign.Param;
 import io.qh.blockchain.po.Transaction;
+
+import java.util.List;
 
 public interface TransactionMapper {
     int deleteByPrimaryKey(Integer transactionId);
@@ -14,4 +17,6 @@ public interface TransactionMapper {
     int updateByPrimaryKeySelective(Transaction record);
 
     int updateByPrimaryKey(Transaction record);
+
+    List<Transaction> selectByBlockId(@Param("blockId") Integer blockId);
 }

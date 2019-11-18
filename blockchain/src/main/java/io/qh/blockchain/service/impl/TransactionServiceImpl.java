@@ -1,7 +1,10 @@
 package io.qh.blockchain.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import io.qh.blockchain.client.BitcoinRest;
+import io.qh.blockchain.constants.PageConfig;
 import io.qh.blockchain.dao.TransactionMapper;
 import io.qh.blockchain.po.Transaction;
 import io.qh.blockchain.service.TransactionService;
@@ -42,8 +45,6 @@ public class TransactionServiceImpl implements TransactionService {
         for (JSONObject vout : vouts) {
             transactionDetailService.syncTxDetailVout(vout, transactionId);
         }
-
-        //todo insert tx detail vin
         List<JSONObject> vins = transactionJson.getJSONArray("vin").toJavaList(JSONObject.class);
         for (JSONObject vin : vins) {
             transactionDetailService.syncTxDetailVin(vin, transactionId);
@@ -55,5 +56,18 @@ public class TransactionServiceImpl implements TransactionService {
     public List<Transaction> getByBlockId(Integer blockId) {
         List<Transaction> transactions = transactionMapper.selectByBlockId(blockId);
         return transactions;
+    }
+
+    @Override
+    public Page<Transaction> getByBlockIdWithPage(Integer blockId, Integer page) {
+        PageHelper.startPage(page, PageConfig.PAGE_SIZE);
+        Page<Transaction> transactions = transactionMapper.selectByBlockIdWithPage(blockId);
+        return transactions;
+    }
+
+    @Override
+    public Transaction getByTxid(String txid) {
+        Transaction transaction = transactionMapper.selectByTxid(txid);
+        return transaction;
     }
 }

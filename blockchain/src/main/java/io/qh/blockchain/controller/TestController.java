@@ -27,6 +27,7 @@ public class TestController {
         JSONObject mempoolInfo = bitcoinRest.getMempoolInfo();
         JSONObject mempoolContents = bitcoinRest.getMempoolContents();
         JSONObject utxo = bitcoinRest.getUTXO("e00fd08ec52cc53312a3d97ee91c0662d952c564534aceb84a8e038a73230019", 0);
+
         return null;
     }
 }

@@ -1,5 +1,6 @@
 package io.qh.blockchain.dao;
 
+import com.github.pagehelper.Page;
 import feign.Param;
 import io.qh.blockchain.po.Transaction;
 
@@ -19,4 +20,6 @@ public interface TransactionMapper {
     int updateByPrimaryKey(Transaction record);
 
     List<Transaction> selectByBlockId(@Param("blockId") Integer blockId);
+    Page<Transaction> selectByBlockIdWithPage(@Param("blockId") Integer blockId);
+    Transaction selectByTxid(@Param("txid") String txid);
 }

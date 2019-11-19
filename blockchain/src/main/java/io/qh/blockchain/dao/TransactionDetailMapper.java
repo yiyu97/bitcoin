@@ -16,5 +16,7 @@ public interface TransactionDetailMapper {
 
     int updateByPrimaryKeySelective(TransactionDetail record);
     List<TransactionDetail> selectByTransactionId(@Param("transactionId") Integer transactionId);
-    int updateByPrimaryKey(TransactionDetail record);
+    Integer selectTotalByAddress(@Param("address") String address);
+    Double selectReceiveByAddress(@Param("address") String address);
+    Double selectSendByAddress(@Param("address") String address);
 }

@@ -11,6 +11,20 @@ public class MiscController {
 
     @GetMapping("/search")
     public String search(@RequestParam String keyword){
-        return null;
+
+        if (keyword.matches("-?\\d+")){
+            return "block detail url";
+        }
+
+        if (keyword.length() < 64){
+            return "address info url";
+        }
+
+        if (keyword.startsWith("00000")){
+            return "block detail url";
+        }else {
+            return "tx detail url";
+        }
+
     }
 }

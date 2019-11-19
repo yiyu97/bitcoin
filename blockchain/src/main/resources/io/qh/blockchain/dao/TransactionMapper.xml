@@ -226,4 +226,9 @@
     from transaction
     where txid = #{txid}
   </select>
+  <select id="selectTransactionByAddress" resultMap="BaseResultMap">
+    SELECT distinct(td.transaction_id) as transaction_id2 ,t.* FROM transaction_detail as td left join transaction as t on td.transaction_id = t.transaction_id
+    where td.address = #{address}
+    order by time desc
+  </select>
 </mapper>

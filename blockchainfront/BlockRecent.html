@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="assets/css/elementui.css">
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <title>Demo</title>
+</head>
+
+<body>
+  <div id="app">
+    <el-table :data="newBlocks">
+        <el-table-column prop="height" label="Height" width="120">
+        </el-table-column>
+        <el-table-column prop="blockhash" label="Hash" width="400">
+            <template slot-scope="scope">
+                <div class="blockhash">
+                    {{'0..' + scope.row.blockhash.substr(12)}}
+                </div>
+            </template>
+        </el-table-column>
+        <el-table-column prop="fornow" label="Mined">
+        </el-table-column>
+        <el-table-column prop="miner" label="Miner">
+        </el-table-column>
+        <el-table-column prop="size" label="Size">
+            <template slot-scope="scope">
+                {{scope.row.size.toLocaleString()}} bytes
+            </template>
+        </el-table-column>
+    </el-table>
+</div>
+
+  <script src="assets/js/axios.min.js"></script>
+  <script src="assets/js/moment.min.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/vue.js"></script>
+  <script src="assets/js/elementui.js"></script>
+  <script src="viewmodels/BlockRecent.js"></script>
+
+</body>
+
+</html>
